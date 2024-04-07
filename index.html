@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Parking</title>
+    <!-- Add Tailwind CSS CDN link -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: "Bebas Neue", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    body {
+        background-image: url('https://images.pexels.com/photos/909907/pexels-photo-909907.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    </style>
+</head>
+
+<body class=" ">
+
+    <div class="container mx-auto p-4 ">
+        <div class="form-container bg-white opacity-100 p-4 rounded-xl shadow-md">
+            <h2 class="text-4xl font-semibold mb-4">Car Parking</h2>
+
+            <div class="mb-4">
+                <label for="name" class="block text-2xl font-medium text-gray-700">Full Name</label>
+                <input type="text" id="name" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="pl-num" class="block text-2xl font-medium text-gray-700">Plate Number</label>
+                <input type="text" id="pl-num" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="carC" class="block text-2xl font-medium text-gray-700">Color</label>
+                <input type="text" id="carC" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <div class="mb-4">
+                <label for="telNum" class="block text-2xl font-medium text-gray-700">Phone Number</label>
+                <input type="tel" id="telNum" class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <button id="btn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Park</button>
+        </div>
+
+        <div class="table-container mt-4">
+            <table class="w-full border border-gray-300 rounded-lg text-2xl">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 bg-gray-200">Full Name</th>
+                        <th class="px-4 py-2 bg-gray-200">Plate Number</th>
+                        <th class="px-4 py-2 bg-gray-200">Color</th>
+                        <th class="px-4 py-2 bg-gray-200">Phone Number</th>
+                        <th class="px-4 py-2 bg-gray-200">Check-in Time</th>
+                        <th class="px-4 py-2 bg-gray-200">Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable" class="table-container text-red text-center bg-white divide-y divide-gray-600 text-xl">
+                   <!-- Table rows will be dynamically added using JavaScript -->
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let btn = document.getElementById('btn')
+        btn.addEventListener('click', fun)
+
+        function fun() {
+
+            var day = new Date();
+
+            var entrance = day.getHours() + ":" + day.getMinutes() + ":" + day.getSeconds();
+
+            let parkingTable = document.getElementById("myTable");
+
+
+            let name = document.getElementById("name").value
+            let plate = document.getElementById("pl-num").value;
+            let color = document.getElementById("carC").value;
+            let phoneNum = document.getElementById("telNum").value;
+
+
+            var row = parkingTable.insertRow();
+            var numRow = document.getElementById('myTable').rows.length;
+
+            row.innerHTML = `<td>${name}</td><td>${plate}</td><td>${color}</td><td>${phoneNum}</td><td>${entrance}</td>`;
+            row.id = numRow;
+
+            var col = row.insertCell();
+
+            var rem = document.createElement('input');
+            rem.type = "button";
+            rem.value = "x";
+            rem.style = "background-color:red;color:black;border-radius:7px;width:50px;height:30px";
+            col.appendChild(rem);
+
+            rem.onclick = function del() {
+                document.getElementById(numRow).remove(numRow);
+            };
+
+        }
+    </script>
+
+</body>
+
+</html>
